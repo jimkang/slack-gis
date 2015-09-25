@@ -23,6 +23,7 @@
   "dependencies": {
     "google-images": "^0.1.0",
     "lodash": "^3.10.1",
+    "probable": "^1.7.0",
     "qs": "^5.1.0"
   }
 }

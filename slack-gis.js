@@ -3,6 +3,7 @@ var http = require('http');
 var qs = require('qs');
 var gis = require('google-images');
 var _ = require('lodash');
+var probable = require('probable');
 
 console.log('The slack-gis webhook server is running.');
 
@@ -72,15 +73,11 @@ function respondToRequestWithBody(req, body, res, headers) {
         res.end(JSON.stringify(response));
       }
     }
-
-    // response.text = 'http://obeythekitty.com/wp-content/uploads/2015/01/lolcat_flying_cat.jpg';
-
   }  
 }
 
 function summarizeImages(images) {
-  var urls = _.pluck(images.slice(0, 1), 'url');
-  return urls.join('\n');
+  return probable.pickFromArray(images).url;
 }
 
 function defined(value) {
