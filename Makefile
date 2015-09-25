@@ -4,7 +4,7 @@ GITDIR = /var/repos/slack-gis.git
 test:
 	node tests/basictests.js
 
-start: start-slack-gis
+start:
 	psy start -n slack-gis -- node slack-gis.js
 
 stop:
