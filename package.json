@@ -1,0 +1,28 @@
+{
+  "name": "slack-gis",
+  "version": "1.0.0",
+  "description": "Searches Google Images for Slack.",
+  "main": "slack-gis.js",
+  "scripts": {
+    "test": "make test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:jimkang/slack-gis.git"
+  },
+  "keywords": [],
+  "author": "Jim Kang",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jimkang/slack-gis/issues"
+  },
+  "homepage": "https://github.com/jimkang/slack-gis",
+  "devDependencies": {
+    "tape": "^3.0.3"
+  },
+  "dependencies": {
+    "google-images": "^0.1.0",
+    "lodash": "^3.10.1",
+    "qs": "^5.1.0"
+  }
+}
