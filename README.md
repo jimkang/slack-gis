@@ -6,12 +6,31 @@ Searches Google Images for Slack.
 Installation
 ------------
 
-    npm install slack-gis
+Running it yourself:
+
+    git clone git@github.com:jimkang/slack-gis.git
+    cd slack-gis
+    npm install
+
+Then, create a config.js file with these contents:
+
+    module.exports = {
+      webhookPort: 7778,
+      validWebhookTokens: [
+        'your Slack webhook token'
+      ]
+    };
+
+Over in Slack, add an Outgoing Webhook that points to your server at the port specified by `webhookPort` in config.js. Copy the generated token by the webhook page into config.js.
 
 Usage
 -----
 
-    make run
+    make start
+
+This will start the server, and it will be ready to serve Google Image search results to Slack!
+
+You can type `<your trigger word>` cats` in a channel, and an image search result will show up!
 
 Tests
 -----
