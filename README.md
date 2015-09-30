@@ -11,11 +11,11 @@ Running it yourself on Linux or Mac (probably the same for Windows, but I haven'
 - Install [Node](https://nodejs.org).
 - Run these commands to clone the repo and install its dependencies.
 
-    git clone git@github.com:jimkang/slack-gis.git
-    cd slack-gis
-    npm install
+        git clone git@github.com:jimkang/slack-gis.git
+        cd slack-gis
+        npm install
 
-- Over in Slack, add an Outgoing Webhook that points to your server at the port specified by `webhookPort` in config.js. 
+- Over in Slack, add an [Outgoing Webhook](https://api.slack.com/outgoing-webhooks) that points to your server at the port specified by `webhookPort` in config.js. 
 
 <img width="824" alt="Outgoing Webhook config" src="https://cloud.githubusercontent.com/assets/324298/10197978/f8f7679c-6767-11e5-92ac-a8908859eff3.png">
 
