@@ -2,17 +2,27 @@ slack-gis
 ==================
 
 Searches Google Images for Slack.
+<br /><br />
 
-Installation
-------------
+<img width="943" alt="gis screenshot" src="https://cloud.githubusercontent.com/assets/324298/10197703/e0cb185e-6766-11e5-9467-1b8c188a7eb4.png">
 
-Running it yourself:
+<br /><br />
 
-    git clone git@github.com:jimkang/slack-gis.git
-    cd slack-gis
-    npm install
+Running it yourself on Linux or Mac (probably the same for Windows, but I haven't tried it)
+-------------------------------------------------------------------------------------------
 
-Then, create a config.js file with these contents:
+- Install [Node](https://nodejs.org).
+- Run these commands to clone the repo and install its dependencies.
+
+        git clone git@github.com:jimkang/slack-gis.git
+        cd slack-gis
+        npm install
+
+- Over in Slack, add an [Outgoing Webhook](https://api.slack.com/outgoing-webhooks) that points to your server at the port specified by `webhookPort` in config.js. 
+
+<img width="824" alt="Outgoing Webhook config" src="https://cloud.githubusercontent.com/assets/324298/10197978/f8f7679c-6767-11e5-92ac-a8908859eff3.png">
+
+- Create a config.js file in the `slack-gis` with these contents:
 
     module.exports = {
       webhookPort: 7778,
@@ -21,21 +31,27 @@ Then, create a config.js file with these contents:
       ]
     };
 
-Over in Slack, add an Outgoing Webhook that points to your server at the port specified by `webhookPort` in config.js. Copy the generated token by the webhook page into config.js.
+- Copy the generated token by the webhook page into the `validWebhookTokens` array in config.js.
+
+- Start the server by running `make start`, and it will be ready to serve Google Image search results to Slack!
+
+<br /><br />
+
+Having me running it for you
+----------------------------
+
+If you want, I can try running GIS for your Slack. Just set up the webhook as described above and send me the token. I can't make guarantees about performance, however. (I think it should be fine, but my GIS webhook lives on a tiny VPS instance with 22 other bots and API servers.)
+
+<br /><br />
 
 Usage
 -----
 
-    make start
+Once set up, you can type `<your trigger word> cats` in a channel, and an image search result will show up!
 
-This will start the server, and it will be ready to serve Google Image search results to Slack!
+<img width="671" alt="gis screenshot of Smidgeo" src="https://cloud.githubusercontent.com/assets/324298/10197619/8bebe1b0-6766-11e5-98ef-fb08f3c3c63e.png">
 
-You can type `<your trigger word>` cats` in a channel, and an image search result will show up!
-
-Tests
------
-
-Run tests with `make test`.
+<br /><br />
 
 License
 -------
