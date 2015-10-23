@@ -73,8 +73,8 @@ function respondToRequestWithBody(req, body, res, headers) {
         var imageURLs = probable.shuffle(_.pluck(images, 'url'));
         var pickOpts = {
           urls: imageURLs,
-
-        }
+          responseChecker: isImageMIMEType
+        };
         pickFirstGoodURL(pickOpts, writeImageToResponse);
       }
     }
