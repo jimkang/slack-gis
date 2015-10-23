@@ -4,6 +4,8 @@ var qs = require('qs');
 var gis = require('google-images');
 var _ = require('lodash');
 var probable = require('probable');
+var pickFirstGoodURL = require('pick-first-good-url');
+var callNextTick = require('call-next-tick');
 
 console.log('The slack-gis webhook server is running.');
 
@@ -68,20 +70,36 @@ function respondToRequestWithBody(req, body, res, headers) {
         res.end();
       }
       else {
-        response.text = summarizeImages(images);
-        res.writeHead(200, headers);
-        res.end(JSON.stringify(response));
+        var imageURLs = probable.shuffle(_.pluck(images, 'url'));
+        var pickOpts = {
+          urls: imageURLs,
+
+        }
+        pickFirstGoodURL(pickOpts, writeImageToResponse);
       }
     }
-  }  
-}
 
-function summarizeImages(images) {
-  return probable.pickFromArray(images).url;
+    function writeImageToResponse(error, imageURL) {
+      if (imageURL) {
+        response.text = imageURL;
+      }
+      else {
+        response.text = '¯\\_(ツ)_/¯';
+      }
+      res.writeHead(200, headers);
+      res.end(JSON.stringify(response));
+    }
+  }
 }
 
 function defined(value) {
   return value !== undefined;
+}
+
+function isImageMIMEType(response, done) {
+  callNextTick(
+    done, null, response.headers['content-type'].indexOf('image/') === 0
+  );
 }
 
 http.createServer(takeRequest).listen(config.webhookPort);
