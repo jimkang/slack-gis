@@ -1,8 +1,7 @@
 var config = require('./config');
 var http = require('http');
 var qs = require('qs');
-var gis = require('google-images');
-var _ = require('lodash');
+var gis = require('g-i-s');
 var probable = require('probable');
 var pickFirstGoodURL = require('pick-first-good-url');
 var callNextTick = require('call-next-tick');
@@ -61,7 +60,7 @@ function respondToRequestWithBody(req, body, res, headers) {
       channel: params.channel_id
     };
 
-    gis.search(messageText, respondWithImages);
+    gis(messageText, respondWithImages);
 
     function respondWithImages(error, images) {
       if (error) {
@@ -70,7 +69,7 @@ function respondToRequestWithBody(req, body, res, headers) {
         res.end();
       }
       else {
-        var imageURLs = probable.shuffle(_.pluck(images, 'url'));
+        var imageURLs = probable.shuffle(images);
         var pickOpts = {
           urls: imageURLs,
           responseChecker: isImageMIMEType
