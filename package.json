@@ -1,6 +1,6 @@
 {
   "name": "slack-gis",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Searches Google Images for Slack.",
   "main": "slack-gis.js",
   "scripts": {
