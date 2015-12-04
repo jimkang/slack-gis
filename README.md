@@ -2,8 +2,6 @@ slack-gis
 ==================
 
 Searches Google Images for Slack.
-
-**Currently does not work. The underlying API endpoint, `http://ajax.googleapis.com/ajax/services/search/images`, has been turned off. Will put together a workaround soon.**
 <br /><br />
 
 <img width="943" alt="gis screenshot" src="https://cloud.githubusercontent.com/assets/324298/10197703/e0cb185e-6766-11e5-9467-1b8c188a7eb4.png">
