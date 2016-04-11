@@ -62,33 +62,33 @@ function respondToRequestWithBody(req, body, res, headers) {
     };
 
     gis(messageText, respondWithImages);
+  }
 
-    function respondWithImages(error, images) {
-      if (error) {
-        console.log(error);
-        res.writeHead(200, headers);
-        res.end();
-      }
-      else {
-        var imageURLs = probable.shuffle(compact(images));
-        var pickOpts = {
-          urls: imageURLs,
-          responseChecker: isImageMIMEType
-        };
-        pickFirstGoodURL(pickOpts, writeImageToResponse);
-      }
-    }
-
-    function writeImageToResponse(error, imageURL) {
-      if (imageURL) {
-        response.text = imageURL;
-      }
-      else {
-        response.text = '¯\\_(ツ)_/¯';
-      }
+  function respondWithImages(error, images) {
+    if (error) {
+      console.log(error);
       res.writeHead(200, headers);
-      res.end(JSON.stringify(response));
+      res.end();
     }
+    else {
+      var imageURLs = probable.shuffle(compact(images));
+      var pickOpts = {
+        urls: imageURLs,
+        responseChecker: isImageMIMEType
+      };
+      pickFirstGoodURL(pickOpts, writeImageToResponse);
+    }
+  }
+
+  function writeImageToResponse(error, imageURL) {
+    if (imageURL) {
+      response.text = imageURL;
+    }
+    else {
+      response.text = '¯\\_(ツ)_/¯';
+    }
+    res.writeHead(200, headers);
+    res.end(JSON.stringify(response));
   }
 }
 
