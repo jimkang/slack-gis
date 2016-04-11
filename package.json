@@ -22,7 +22,7 @@
   },
   "dependencies": {
     "call-next-tick": "^1.1.2",
-    "g-i-s": "^1.0.2",
+    "g-i-s": "^1.0.3",
     "lodash.compact": "^3.0.1",
     "pick-first-good-url": "^1.0.0",
     "probable": "^1.7.0",
