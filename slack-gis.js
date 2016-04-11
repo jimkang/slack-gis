@@ -5,6 +5,7 @@ var gis = require('g-i-s');
 var probable = require('probable');
 var pickFirstGoodURL = require('pick-first-good-url');
 var callNextTick = require('call-next-tick');
+var compact = require('lodash.compact');
 
 console.log('The slack-gis webhook server is running.');
 
@@ -69,7 +70,7 @@ function respondToRequestWithBody(req, body, res, headers) {
         res.end();
       }
       else {
-        var imageURLs = probable.shuffle(images);
+        var imageURLs = probable.shuffle(compact(images));
         var pickOpts = {
           urls: imageURLs,
           responseChecker: isImageMIMEType
