@@ -71,7 +71,15 @@ function respondToRequestWithBody(req, body, res, headers) {
       res.end();
     }
     else {
-      var imageURLs = probable.shuffle(compact(images));
+      var goodImages = compact(images);
+      var imageURLs;
+      if (probable.roll(2) === 0) {
+        imageURLs = probable.shuffle(images);
+      }
+      else {
+        imageURLs = probable.shuffle(images.slice(0, 10));
+      }
+
       var pickOpts = {
         urls: imageURLs,
         responseChecker: isImageMIMEType
