@@ -61,7 +61,12 @@ function respondToRequestWithBody(req, body, res, headers) {
       channel: params.channel_id
     };
 
-    gis(messageText, respondWithImages);
+    var gisOpts = {
+      searchTerm: messageText,
+      queryStringAddition: '&safe=active'
+    };
+
+    gis(gisOpts, respondWithImages);
   }
 
   function respondWithImages(error, images) {
