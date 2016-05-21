@@ -93,9 +93,9 @@ function respondToRequestWithBody(req, body, res, headers) {
     }
   }
 
-  function writeImageToResponse(error, imageURL) {
-    if (imageURL) {
-      response.text = imageURL;
+  function writeImageToResponse(error, image) {
+    if (image && image.url) {
+      response.text = image.url;
     }
     else {
       response.text = '¯\\_(ツ)_/¯';
