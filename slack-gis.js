@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 var config = require('./config');
 var http = require('http');
 var qs = require('qs');

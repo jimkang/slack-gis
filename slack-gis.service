@@ -1,0 +1,14 @@
+[Unit]
+Description=slack-gis
+After=network.target
+
+[Service]
+ExecStart=/opt/slack-gis/slack-gis.js
+Restart=always
+User=bot
+Group=bot
+Environment=PATH=/usr/bin:/usr/local/bin
+WorkingDirectory=/opt/slack-gis
+
+[Install]
+WantedBy=multi-user.target

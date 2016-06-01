@@ -1,25 +1,33 @@
+PROJECTNAME = slack-gis
 HOMEDIR = $(shell pwd)
-GITDIR = /var/repos/slack-gis.git
+USER = bot
+PRIVUSER = root
+SERVER = smidgeo
+SSHCMD = ssh $(USER)@$(SERVER)
+PRIVSSHCMD = ssh $(PRIVUSER)@$(SERVER)
+APPDIR = /opt/$(PROJECTNAME)
 
-test:
-	node tests/basictests.js
+pushall: sync set-permissions restart-remote
+	git push origin master
 
-start:
-	psy start -n slack-gis -- node slack-gis.js
+sync:
+	rsync -a $(HOMEDIR) $(USER)@$(SERVER):/opt/ --exclude node_modules/ --exclude data/
+	$(SSHCMD) "cd $(APPDIR) && npm install"
 
-stop:
-	psy stop slack-gis || echo "Non-zero return code is OK."
+set-permissions:
+	$(SSHCMD) "chmod +x $(APPDIR)/slack-gis.js"
 
-sync-worktree-to-git:
-	git --work-tree=$(HOMEDIR) --git-dir=$(GITDIR) checkout -f
+update-remote: sync set-permissions restart-remote
 
-npm-install:
-	cd $(HOMEDIR)
-	npm install
-	npm prune
+restart-remote:
+	$(PRIVSSHCMD) "service $(PROJECTNAME) restart"
 
-post-receive: sync-worktree-to-git npm-install stop start
+install-service:
+	$(PRIVSSHCMD) "cp $(APPDIR)/$(PROJECTNAME).service /etc/systemd/system && \
+	systemctl enable $(PROJECTNAME)"
 
-pushall:
-	git push origin master && git push server master
+check-status:
+	$(SSHCMD) "systemctl status $(PROJECTNAME)"
 
+check-log:
+	$(SSHCMD) "journalctl -u $(PROJECTNAME)"
