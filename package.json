@@ -24,6 +24,7 @@
     "call-next-tick": "^1.1.2",
     "g-i-s": "^2.0.0",
     "lodash.compact": "^3.0.1",
+    "lodash.pluck": "^3.1.2",
     "pick-first-good-url": "^1.0.0",
     "probable": "^1.7.0",
     "qs": "^5.1.0"
