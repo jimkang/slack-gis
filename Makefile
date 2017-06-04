@@ -22,6 +22,9 @@ update-remote: sync set-permissions restart-remote
 restart-remote:
 	$(PRIVSSHCMD) "service $(PROJECTNAME) restart"
 
+stop:
+	$(PRIVSSHCMD) "service $(PROJECTNAME) stop"
+
 install-service:
 	$(PRIVSSHCMD) "cp $(APPDIR)/$(PROJECTNAME).service /etc/systemd/system && \
 	systemctl enable $(PROJECTNAME)"
